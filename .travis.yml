@@ -1,0 +1,14 @@
+language: java
+jdk:
+- oraclejdk8
+branches:
+  only:
+  - master
+  - develop
+notifications:
+  email:
+    recipients:
+    - apueblahol@gmail.com
+script:
+- mvn verify
+- mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
