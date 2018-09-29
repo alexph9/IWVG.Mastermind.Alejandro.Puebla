@@ -7,7 +7,7 @@ public class ColorMap {
 
     private  Map<Color, String> ALL_COLORS;
 
-    private static ColorMap colorMap;
+    private static ColorMap colorMap = null;
 
     ColorMap(Map<Color, String> colors){
         this.ALL_COLORS = Collections.unmodifiableMap(colors);
