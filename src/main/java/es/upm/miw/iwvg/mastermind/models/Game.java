@@ -1,5 +1,7 @@
 package es.upm.miw.iwvg.mastermind.models;
 
+import jdk.nashorn.internal.parser.Token;
+
 import java.util.Map;
 
 public class Game {
@@ -8,15 +10,20 @@ public class Game {
 
     private Board board;
 
-    private Attempt playerAttempt;
+    private TokensSequence player;
 
     private ColorMap colorName;
+
+    private int numAttempts;
+
+    private static final int MAX_NUM_ATTEMPTS = 10;
 
     public Game(){
         this.state = GameState.STARTING;
         this.board = new Board();
-        this.playerAttempt = new Attempt();
+        this.player = new TokensSequence();
         this.colorName.getColorMap();
+        this.numAttempts = this.MAX_NUM_ATTEMPTS;
     }
 
     public GameState getState(){
@@ -27,20 +34,14 @@ public class Game {
         this.state = state;
     }
 
-    public void setPlayerTokens(TokensSequence player){
-        this.playerAttempt.setPlayerTokens(player);
-    }
+    public void setPlayerTokens(TokensSequence player){ this.player.setTokens(player); }
 
-    public TokensSequence getPlayerTokens(){
-        return this.playerAttempt.getPlayerTokens();
-    }
+    public TokensSequence randomTokens(){ return this.player.randomTokens();}
 
-    public void setRandomPlayerTokens(){
-        this.playerAttempt.fillRandomColors();
-    }
+    public TokensSequence getPlayerTokens(){ return this.player; }
 
     public void clearPlayerTokens(){
-        this.playerAttempt.clear();
+        this.player.clearTokens();
     }
 
     public TokensSequence getBoardTokens(){
@@ -63,7 +64,15 @@ public class Game {
         return this.board.isVictory(playerTokens);
     }
 
-    public Map<Color, String> getColorName() {
-        return colorName.getAllColors();
-    }
+    public Map<Color, String> getColorName() { return colorName.getAllColors(); }
+
+    public int getNumAttempts(){ return this.numAttempts; }
+
+    public void restOneAttempt(){ this.numAttempts -= 1;}
+
+    public int getMaxNumAttempts(){ return this.MAX_NUM_ATTEMPTS; }
+
+    public boolean hasMoreAttempts() { return this.getNumAttempts() != 0;}
+
+    public void resetNumAttempts(){ this.numAttempts = this.getMaxNumAttempts();}
 }

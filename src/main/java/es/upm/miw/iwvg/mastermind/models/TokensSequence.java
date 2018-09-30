@@ -1,8 +1,7 @@
 package es.upm.miw.iwvg.mastermind.models;
 
-import com.sun.corba.se.impl.oa.toa.TOA;
+import es.upm.miw.iwvg.mastermind.controllers.TokenSequenceController;
 import es.upm.miw.iwvg.mastermind.utils.ClosedInterval;
-
 import java.util.*;
 
 public class TokensSequence implements Cloneable{
@@ -11,7 +10,10 @@ public class TokensSequence implements Cloneable{
     private static final int DIMENSION = 4;
     private static final ClosedInterval LIMITS = new ClosedInterval(0, DIMENSION-1);
 
-    TokensSequence(){ this.tokens = new ArrayList<Color>(DIMENSION); }
+    public TokensSequence(){ this.tokens = new ArrayList<Color>(DIMENSION); }
+
+    TokensSequence(List<Color> tokens){ this.tokens = tokens;}
+
 
     public Color getColor(int position){
         assert (LIMITS.includes(position));
@@ -22,22 +24,28 @@ public class TokensSequence implements Cloneable{
         return DIMENSION;
     }
 
-    public void setColor(int position, Color color){
-        assert (LIMITS.includes(position));
-        this.tokens.add(position, color);
-    }
+    public List<Color> getTokens(){ return this.tokens; }
 
-    public void chooseTokensRandom(){
-        List<Color> colors = Collections.unmodifiableList(Arrays.asList(Color.values()));
-        int size = colors.size();
-        Random random = new Random(System.currentTimeMillis());
-
-        for(int i = 0; i < tokens.size(); i++){
-            this.tokens.add(i, colors.get(random.nextInt(size)));
+    public void clearTokens(){
+        for(Color color : this.getTokens()){
+            this.getTokens().clear();
         }
     }
 
-    public List<Color> getTokens(){ return this.tokens; }
+    public void setTokens(TokensSequence tokens) { this.tokens = tokens.getTokens(); }
+
+    public TokensSequence randomTokens(){
+        List<Color> colors = Collections.unmodifiableList(Arrays.asList(Color.values()));
+        List<Color> randomTokens = new ArrayList<>(this.getDimension());
+        int size = colors.size();
+        Random random = new Random(System.currentTimeMillis());
+
+        for(int i = 0; i < randomTokens.size(); i++){
+            randomTokens.add(i, colors.get(random.nextInt(size)));
+        }
+
+        return new TokensSequence(randomTokens);
+    }
 
     public boolean equalSequences(TokensSequence sequence){ return this.getTokens().equals(sequence.getTokens()); }
 
