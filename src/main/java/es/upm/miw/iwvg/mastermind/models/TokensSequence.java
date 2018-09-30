@@ -1,25 +1,29 @@
 package es.upm.miw.iwvg.mastermind.models;
 
+import com.sun.corba.se.impl.oa.toa.TOA;
 import es.upm.miw.iwvg.mastermind.utils.ClosedInterval;
 
 import java.util.*;
 
-public class TokensSequence {
+public class TokensSequence implements Cloneable{
 
-    private ArrayList<Color> tokens;
+    private List<Color> tokens;
     private static final int DIMENSION = 4;
+    private static final ClosedInterval LIMITS = new ClosedInterval(0, DIMENSION-1);
 
-    TokensSequence(){
-        this.tokens = new ArrayList<Color>(DIMENSION);
-    }
+    TokensSequence(){ this.tokens = new ArrayList<Color>(DIMENSION); }
 
     public Color getColor(int position){
-        assert (new ClosedInterval(0,DIMENSION-1).includes(position));
+        assert (LIMITS.includes(position));
         return tokens.get(position);
     }
 
+    public int getDimension(){
+        return DIMENSION;
+    }
+
     public void setColor(int position, Color color){
-        assert (new ClosedInterval(0,DIMENSION-1).includes(position));
+        assert (LIMITS.includes(position));
         this.tokens.add(position, color);
     }
 
@@ -31,5 +35,17 @@ public class TokensSequence {
         for(int i = 0; i < tokens.size(); i++){
             this.tokens.add(i, colors.get(random.nextInt(size)));
         }
+    }
+
+    public List<Color> getTokens(){ return this.tokens; }
+
+    public boolean equalSequences(TokensSequence sequence){ return this.getTokens().equals(sequence.getTokens()); }
+
+    public boolean isColorContained(Color color){ return this.getTokens().contains(color); }
+
+    public int posColorContained(Color color){ return this.getTokens().indexOf(color); }
+
+    public TokensSequence clone() throws CloneNotSupportedException{
+        return (TokensSequence) super.clone();
     }
 }
