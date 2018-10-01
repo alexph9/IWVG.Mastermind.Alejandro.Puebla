@@ -54,4 +54,8 @@ public abstract class LocalController {
     public boolean hasMoreAttempts(){ return this.game.hasMoreAttempts(); }
 
     public void resetNumAttempts(){ this.game.resetNumAttempts();}
+
+    public int getGameOption(){ return this.game.getOptionGame();}
+
+    public void setGameOption(int optionGame){ this.game.setOptionGame(optionGame);}
 }

@@ -16,6 +16,8 @@ public class Game {
 
     private int numAttempts;
 
+    private int optionGame;
+
     private static final int MAX_NUM_ATTEMPTS = 10;
 
     public Game(){
@@ -24,6 +26,7 @@ public class Game {
         this.player = new TokensSequence();
         this.colorName.getColorMap();
         this.numAttempts = this.MAX_NUM_ATTEMPTS;
+        this.optionGame = 0;
     }
 
     public GameState getState(){
@@ -75,4 +78,8 @@ public class Game {
     public boolean hasMoreAttempts() { return this.getNumAttempts() != 0;}
 
     public void resetNumAttempts(){ this.numAttempts = this.getMaxNumAttempts();}
+
+    public int getOptionGame() {return this.optionGame; }
+
+    public void setOptionGame(int optionGame) { this.optionGame = optionGame; }
 }

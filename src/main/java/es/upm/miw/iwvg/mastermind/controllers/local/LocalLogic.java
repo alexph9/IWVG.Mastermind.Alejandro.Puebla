@@ -9,14 +9,14 @@ public class LocalLogic implements GameLogic {
 
     private LocalStartController startController;
 
-    private LocalColocateTokensController colocateTokensController;
+    private LocalCheckTokensController checkTokensController;
 
     private LocalContinueController continueController;
 
     public LocalLogic(){
         this.game = new Game();
         startController = new LocalStartController(this.game);
-        colocateTokensController = new LocalColocateTokensController(this.game);
+        checkTokensController = new LocalCheckTokensController(this.game);
         continueController = new LocalContinueController(this.game);
     }
 
@@ -25,12 +25,12 @@ public class LocalLogic implements GameLogic {
             case STARTING:
                 return startController;
             case PLAYING:
-                return colocateTokensController;
+                return checkTokensController;
             case FINISHED:
                 return continueController;
             case EXIT:
-                default:
-                    return null;
+            default:
+                return null;
         }
     }
 }

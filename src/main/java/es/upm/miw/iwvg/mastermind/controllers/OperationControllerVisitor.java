@@ -4,7 +4,7 @@ public interface OperationControllerVisitor {
 
     void visit(StartController startController);
 
-    void visit(ColocateTokensController colocateTokensController);
+    void visit(CheckTokensController checkTokensController);
 
     void visit(ContinueController continueController);
 }

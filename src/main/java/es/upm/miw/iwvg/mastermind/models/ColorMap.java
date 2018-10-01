@@ -28,7 +28,6 @@ public class ColorMap {
         color.put(Color.Z, "Azul");
         color.put(Color.B, "Blanco");
         color.put(Color.N, "Negro");
-        color.put(Color.X, "SECRETO");
         return color;
     }
 

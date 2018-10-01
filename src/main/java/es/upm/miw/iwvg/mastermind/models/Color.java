@@ -6,6 +6,5 @@ public enum Color {
     V,
     Z,
     B,
-    N,
-    X
+    N
 }

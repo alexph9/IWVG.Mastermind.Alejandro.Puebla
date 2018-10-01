@@ -14,6 +14,7 @@ public class LocalContinueController extends LocalOperationController
         if(hasNewGames){
             this.clearPlayerTokens();
             this.clearBoardTokens();
+            this.resetNumAttempts();
             this.setState(GameState.STARTING);
         } else {
             this.setState(GameState.EXIT);

@@ -7,7 +7,7 @@ import java.util.*;
 public class TokensSequence implements Cloneable{
 
     private List<Color> tokens;
-    private static final int DIMENSION = 4;
+    public static final int DIMENSION = 4;
     private static final ClosedInterval LIMITS = new ClosedInterval(0, DIMENSION-1);
 
     public TokensSequence(){ this.tokens = new ArrayList<Color>(DIMENSION); }

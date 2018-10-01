@@ -11,13 +11,13 @@ public class LocalStartController extends LocalOperationController
 
     private Game game;
 
-    LocalStartController(Game game){
+    LocalStartController(Game game, LocalCheckTokensController checkTokensController){
         super(game);
     }
 
-    public void start(){
-        super.resetNumAttempts();
+    public void start(int option){
         super.setRandomBoardTokens();
+        super.setGameOption(option);
         this.setState(GameState.PLAYING);
     }
 
